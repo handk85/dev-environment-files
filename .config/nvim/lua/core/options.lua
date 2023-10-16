@@ -34,4 +34,8 @@ opt.clipboard:append("unnamedplus")
 opt.splitright = true
 opt.splitbelow = true
 
+-- spellchecks
+opt.spelllang = "en_gb"
+opt.spell = true
+
 opt.iskeyword:append("-")
