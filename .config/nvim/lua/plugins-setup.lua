@@ -110,6 +110,9 @@ return packer.startup(function(use)
     ft = { "markdown" },
   })
 
+  -- If you want to use nvim-lspconfig
+  use({ "vigoux/ltex-ls.nvim", requires = "neovim/nvim-lspconfig" })
+
   if packer_bootstrap then
     require("packer").sync()
   end

@@ -115,5 +115,5 @@ lspconfig["pyright"].setup({})
 
 -- configure ltex language server
 lspconfig["ltex"].setup({
-  language = "en-gb",
+  language = "en-GB",
 })
