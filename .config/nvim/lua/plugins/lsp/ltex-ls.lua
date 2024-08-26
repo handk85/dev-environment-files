@@ -1,4 +1,10 @@
-require("ltex-ls").setup({
+-- import ltex-ls plugin safely
+local ltex_status, ltex = pcall(require, "ltex-ls")
+if not ltex_status then
+  return
+end
+
+ltex.setup({
   on_attach = on_attach,
   capabilities = capabilities,
   use_spellfile = false,

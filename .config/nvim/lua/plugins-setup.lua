@@ -111,7 +111,7 @@ return packer.startup(function(use)
   })
 
   -- If you want to use nvim-lspconfig
-  use({ "vigoux/ltex-ls.nvim", requires = "neovim/nvim-lspconfig" })
+  use({ "vigoux/ltex-ls.nvim" })
 
   if packer_bootstrap then
     require("packer").sync()
