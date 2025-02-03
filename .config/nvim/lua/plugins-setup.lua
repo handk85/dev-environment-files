@@ -113,6 +113,8 @@ return packer.startup(function(use)
   -- If you want to use nvim-lspconfig
   use({ "vigoux/ltex-ls.nvim" })
 
+  use({ "microsoft/pyright" })
+
   if packer_bootstrap then
     require("packer").sync()
   end
