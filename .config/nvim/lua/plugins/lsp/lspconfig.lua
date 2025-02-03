@@ -50,7 +50,6 @@ for type, icon in pairs(signs) do
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 end
 
-
 -- configure pyright language server
 lspconfig["pyright"].setup({
   capabilities = capabilities,
@@ -63,6 +62,11 @@ lspconfig["emmet_ls"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
+})
+
+lspconfig["jdtls"].setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
 })
 
 -- configure lua server (with special settings)
