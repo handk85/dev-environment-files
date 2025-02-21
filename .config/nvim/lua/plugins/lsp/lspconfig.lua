@@ -99,7 +99,10 @@ lspconfig["ltex"].setup({
   settings = {
     ltex = {
       enabled = { "latex", "tex", "bib", "markdown" },
-      language = "auto",
+      language = "en-GB",
+      disabledRules = {
+        ["en-GB"] = { "OXFORD_SPELLING_Z_NOT_S" },
+      },
       diagnosticSeverity = "information",
       sentenceCacheSize = 2000,
       dictionary = (function()
