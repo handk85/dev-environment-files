@@ -39,3 +39,5 @@ opt.spelllang = "en_gb"
 opt.spell = true
 
 opt.iskeyword:append("-")
+
+vim.g.neovide_scale_factor = 1.5

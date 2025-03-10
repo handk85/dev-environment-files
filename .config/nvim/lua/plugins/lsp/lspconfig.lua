@@ -57,8 +57,7 @@ lspconfig["pyright"].setup({
   filetypes = { "python" },
 })
 
--- configure emmet language server
-lspconfig["emmet_ls"].setup({
+lspconfig["ts_ls"].setup({
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
