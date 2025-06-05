@@ -49,7 +49,8 @@ local capabilities = cmp_nvim_lsp.default_capabilities()
 local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+  --vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+  vim.diagnostic.config({signs = {hl, { text = icon, texthl = hl, numhl = "" }}})
 end
 
 -- configure pyright language server
