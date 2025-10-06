@@ -1,9 +1,3 @@
--- import lspconfig plugin safely
-local lspconfig_status, lspconfig = pcall(require, "lspconfig")
-if not lspconfig_status then
-  return
-end
-
 -- import cmp-nvim-lsp plugin safely
 local cmp_nvim_lsp_status, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmp_nvim_lsp_status then
@@ -54,25 +48,25 @@ for type, icon in pairs(signs) do
 end
 
 -- configure pyright language server
-lspconfig["pyright"].setup({
+vim.lsp.config("pyright",{
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "python" },
 })
 
-lspconfig["ts_ls"].setup({
+vim.lsp.config("ts_ls",{
   capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 })
 
-lspconfig["jdtls"].setup({
+vim.lsp.config("jdtls",{
   capabilities = capabilities,
   on_attach = on_attach,
 })
 
 -- configure lua server (with special settings)
-lspconfig["lua_ls"].setup({
+vim.lsp.config("lua_ls",{
   capabilities = capabilities,
   on_attach = on_attach,
   settings = { -- custom settings for lua
@@ -93,7 +87,7 @@ lspconfig["lua_ls"].setup({
 })
 
 -- configure ltex language server
-lspconfig["ltex"].setup({
+vim.lsp.config("ltex",{
   on_attach = on_attach,
   capabilities = capabilities,
   use_spellfile = false,
