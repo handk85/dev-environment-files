@@ -4,7 +4,6 @@ if not cmp_nvim_lsp_status then
   return
 end
 
-vim.diagnostic.config({ virtual_text = true })
 
 local keymap = vim.keymap -- for conciseness
 
@@ -25,27 +24,31 @@ local on_attach = function(client, bufnr)
   keymap.set("n", "[d", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts) -- jump to previous diagnostic in buffer
   keymap.set("n", "]d", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts) -- jump to next diagnostic in buffer
   keymap.set("n", "K", "<cmd>Lspsaga hover_doc<CR>", opts) -- show documentation for what is under cursor
-  keymap.set("n", "<leader>o", "<cmd>LSoutlineToggle<CR>", opts) -- see outline on right hand side
+  keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<CR>", opts) -- see outline on right hand side
 
   -- typescript specific keymaps (e.g. rename file and update imports)
-  if client.name == "ts_ls" then
-    keymap.set("n", "<leader>rf", ":TypescriptRenameFile<CR>") -- rename file and update imports
-    keymap.set("n", "<leader>oi", ":TypescriptOrganizeImports<CR>") -- organize imports (not in youtube nvim video)
-    keymap.set("n", "<leader>ru", ":TypescriptRemoveUnused<CR>") -- remove unused variables (not in youtube nvim video)
+  if client.name == "typescript-tools" then
+    keymap.set("n", "<leader>rf", ":TSToolsRenameFile<CR>") -- rename file and update imports
+    keymap.set("n", "<leader>oi", ":TSToolsOrganizeImports<CR>") -- organize imports
+    keymap.set("n", "<leader>ru", ":TSToolsRemoveUnusedImports<CR>") -- remove unused variables
   end
 end
 
 -- used to enable autocompletion (assign to every lsp server config)
 local capabilities = cmp_nvim_lsp.default_capabilities()
 
--- Change the Diagnostic symbols in the sign column (gutter)
--- (not in youtube nvim video)
-local signs = { Error = " ", Warn = " ", Hint = "ﴞ ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  --vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-  vim.diagnostic.config({signs = {hl, { text = icon, texthl = hl, numhl = "" }}})
-end
+-- Diagnostic display configuration
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN]  = " ",
+      [vim.diagnostic.severity.HINT]  = "ﴞ ",
+      [vim.diagnostic.severity.INFO]  = " ",
+    },
+  },
+})
 
 -- configure pyright language server
 vim.lsp.config("pyright",{
@@ -54,11 +57,14 @@ vim.lsp.config("pyright",{
   filetypes = { "python" },
 })
 
-vim.lsp.config("ts_ls",{
-  capabilities = capabilities,
-  on_attach = on_attach,
-  filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-})
+-- configure typescript server via typescript-tools (replaces ts_ls direct config)
+local typescript_tools_status, typescript_tools = pcall(require, "typescript-tools")
+if typescript_tools_status then
+  typescript_tools.setup({
+    on_attach = on_attach,
+    capabilities = capabilities,
+  })
+end
 
 vim.lsp.config("jdtls",{
   capabilities = capabilities,
