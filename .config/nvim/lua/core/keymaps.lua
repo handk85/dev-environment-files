@@ -1,6 +1,13 @@
 vim.g.mapleader = " "
 local keymap = vim.keymap -- for conciseness
 
+-- Neovide clipboard
+if vim.g.neovide then
+  keymap.set({ "n", "v" }, "<D-v>", '"+p', { noremap = true, silent = true })
+  keymap.set("i", "<D-v>", '<ESC>"+pa', { noremap = true, silent = true })
+  keymap.set("c", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+end
+
 -- window management
 keymap.set("n", "<leader>sv", "<C-w>v") -- split window vertically
 keymap.set("n", "<leader>sh", "<C-w>s") -- split window horizontally
