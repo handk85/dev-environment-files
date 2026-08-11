@@ -5,17 +5,17 @@ TERM = "xterm-256color"
 size = 19.0
 
 [font.bold]
-family = "MesloLGS Nerd Font"
+family = "MesloLGS NF"
 
 [font.glyph_offset]
 x = 0
 y = 0
 
 [font.italic]
-family = "MesloLGS Nerd Font"
+family = "MesloLGS NF"
 
 [font.normal]
-family = "MesloLGS Nerd Font"
+family = "MesloLGS NF"
 
 [font.offset]
 x = 0

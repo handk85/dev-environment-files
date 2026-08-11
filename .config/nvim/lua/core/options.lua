@@ -37,6 +37,7 @@ opt.splitbelow = true
 -- spellchecks
 opt.spelllang = "en_gb"
 opt.spell = true
+opt.spellfile = vim.fn.stdpath("config") .. "/spell/en.utf-8.add"
 
 opt.iskeyword:append("-")
 

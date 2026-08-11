@@ -5,7 +5,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
   sources = {
     null_ls.builtins.formatting.prettier.with({
-      extra_filetypes = { "markdown", "javascript", "typescript", "javascriptreact", "typescriptreact" },
+      extra_filetypes = { "markdown", "javascript", "typescript", "javascriptreact", "typescriptreact", "json" },
     }),
   },
   on_attach = function(client, bufnr)
